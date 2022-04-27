@@ -9,6 +9,7 @@ import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
 import com.ocr.firebaseoc.databinding.ActivityMainBinding;
 
 import java.util.Arrays;
@@ -31,8 +32,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        AppEventsLogger.activateApp(this);
+        //FirebaseAuth.getInstance().signOut();
+        //FacebookSdk.sdkInitialize(getApplicationContext());
+        //AppEventsLogger.activateApp(this);
         setupListeners();
     }
 

@@ -11,6 +11,9 @@ android {
         targetSdkVersion 31
         versionCode 1
         versionName "1.0"
+        // ...
+        resConfigs "en" // And any other languages you support
+
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -20,8 +23,8 @@ android {
     }
     
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
     buildTypes {
@@ -40,11 +43,8 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
     implementation "androidx.recyclerview:recyclerview:1.2.1"
     implementation platform('com.google.firebase:firebase-bom:29.3.0')
-    implementation 'com.google.firebase:firebase-analytics'
-    implementation 'com.google.firebase:firebase-auth'
-    implementation 'com.firebaseui:firebase-ui:8.0.1'
     implementation 'com.firebaseui:firebase-ui-auth:8.0.1'
-    implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
+    implementation 'com.facebook.android:facebook-android-sdk:13.2.0'
     implementation 'com.google.android.material:material:1.5.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
