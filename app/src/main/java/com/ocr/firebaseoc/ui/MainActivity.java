@@ -1,4 +1,4 @@
-package com.ocr.firebaseoc;
+package com.ocr.firebaseoc.ui;
 
 import androidx.annotation.Nullable;
 
@@ -9,20 +9,18 @@ import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.auth.FirebaseAuth;
+import com.ocr.firebaseoc.R;
 import com.ocr.firebaseoc.databinding.ActivityMainBinding;
+import com.ocr.firebaseoc.manager.UserManager;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
-
 
 
 public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
     private static final int RC_SIGN_IN = 123;
+    private UserManager userManager = UserManager.getInstance();
 
     @Override
     ActivityMainBinding getViewBinding() {
@@ -32,16 +30,32 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //FirebaseAuth.getInstance().signOut();
-        //FacebookSdk.sdkInitialize(getApplicationContext());
-        //AppEventsLogger.activateApp(this);
         setupListeners();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateLoginButton();
+    }
+
+    private void updateLoginButton() {
+        binding.loginButton.setText(userManager.isCurrentUserLogged() ? getString(R.string.button_login_text_logged) : getString(R.string.button_login_text_not_logged));
+    }
+
+    private void startProfileActivity(){
+        startActivity(new Intent( this, ProfileActivity.class));
     }
 
     private void setupListeners(){
         // Login Button
         binding.loginButton.setOnClickListener(view -> {
-            startSignInActivity();
+            if( userManager.isCurrentUserLogged()){
+                startProfileActivity();
+            }
+            else {
+                startSignInActivity();
+            }
         });
     }
 
